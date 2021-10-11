@@ -47,7 +47,7 @@ def are_perfect_squares(lst: list[int]) -> bool:
 
 
 def test_are_perfect_squares():
-    assert are_perfect_squares([]) == True
+    assert are_perfect_squares([9]) == True
     assert are_perfect_squares([2,5,64,9]) == False
     assert are_perfect_squares([36,16,36,9]) == True
     assert are_perfect_squares([49, 64]) == True
