@@ -5,16 +5,15 @@ def printMenu():
     print("1. Citire lista")
     print("2. Determinare cea mai lungă subsecvență cu proprietatea 1")
     print("3. Determinare cea mai lungă subsecvență cu proprietatea 2")
-    print("4. Determinare cea mai lunga subsecventa cu proprietatea 3")
-    print("5. Ieșire")
+    print("4. Ieșire")
 
 
 def citireLista():
-    lst = []
+    l = []
     n= int(input("Dati numarul de elemente: "))
     for i in range(n):
-        lst.append(int(input("L[" + str(i)  + "]=")))
-    return lst
+        l.append(int(input("L[" + str(i)  + "]=")))
+    return l
 
 
 def get_longest_subsequence(lst: list[int], has_property: callable) -> list[int]:
@@ -36,22 +35,23 @@ def get_longest_subsequence(lst: list[int], has_property: callable) -> list[int]
 
 
 def are_perfect_squares(lst: list[int]) -> bool:
-    """"
-    determina daca toate nr. dintr-o lista sunt patrate perfecte
-    :param lst: lista de numere intregi
-    :return: True, daca toatee nr. din lst sunt patrate perfecte sau False, in caz contrar
-    """
+    """Verifica daca o lista este formata doar din patrate perfecte
+        param:    lst (list[int]): Lista verifiata
+        return: True daca e formata doar din patrate perfecte, False in caz contrar.
+        """
     for x in lst:
-        rad = math.sqrt(x)
-        if int(rad + 0.5) ** 2 != x:
+        if x != int(math.sqrt(x)) ** 2:
             return False
-    return True
+
+        return True
 
 
 def test_are_perfect_squares():
-    assert are_perfect_squares([4, 9]) is True
-    assert are_perfect_squares([3]) is False
-    assert are_perfect_squares([]) is True
+    assert are_perfect_squares([]) == True
+    assert are_perfect_squares([2,5,64,9]) == False
+    assert are_perfect_squares([36,16,36,9]) == True
+    assert are_perfect_squares([49, 64]) == True
+
 
 def get_longest_all_perfect_squares(lst: list[int]) -> list[int]:
     """Returneaza cea mai lunga subsecventa a unei liste date, continand doar elementele care sunt patrate perfecte.
@@ -62,6 +62,7 @@ def get_longest_all_perfect_squares(lst: list[int]) -> list[int]:
 
 
 def test_get_longest_all_perfect_squares():
+    assert get_longest_all_perfect_squares([23,45,91,81,36,25,6,25,16,58,9]) == [81,36,25]
     assert get_longest_all_perfect_squares([17,21,48]) == []
     assert get_longest_all_perfect_squares([49, 6, 9, 21, 25, 25]) == [25,25]
     assert get_longest_all_perfect_squares([]) == []
@@ -76,7 +77,7 @@ def get_bytes1(n: int) -> int:
     bytes1 = 0
     while n:
         if n % 2 == 1:
-            bytes1 += 1
+            bytes1+=1
         n //= 2
 
     return bytes1
@@ -120,6 +121,7 @@ def test_get_longest_same_bit_counts():
     assert get_longest_same_bit_counts([5,9,2,1,7,21,76,48]) == [7,21,76]
     assert get_longest_same_bit_counts([12,4,16,91,5]) == [4,16]
     assert get_longest_same_bit_counts([]) == []
+    assert get_longest_same_bit_counts([0]) == []
 
 
 def is_palindrome(x: int) -> bool:
@@ -185,8 +187,8 @@ def main():
     test_are_all_palindromes()
     test_get_longest_all_palindromes()
     lst = []
-    printMenu()
     while True:
+        printMenu()
         optiune = input("Dati optiune:  ")
         if optiune == "1":
             lst = citireLista()
@@ -195,12 +197,9 @@ def main():
         elif optiune == "3":
             print(get_longest_same_bit_counts(lst))
         elif optiune == "4":
-            print(get_longest_all_palindromes(lst))
-        elif optiune == "5":
             break
         else:
             print("Optiune gresita: Reincercati!")
-
 
 main()
 
